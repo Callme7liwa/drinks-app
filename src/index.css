@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dopamine Decor Palette */
+    --background: 35 100% 96%;
+    --foreground: 0 0% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    /* Coral/Orange Primary */
+    --primary: 4 90% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Electric Blue Secondary */
+    --secondary: 210 100% 60%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted warm tones */
+    --muted: 35 30% 90%;
+    --muted-foreground: 0 0% 40%;
+
+    /* Lime Green Accent */
+    --accent: 120 60% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Hot Pink for fun */
+    --highlight: 330 85% 60%;
+    --highlight-foreground: 0 0% 100%;
+
+    /* Purple pop */
+    --pop: 270 70% 60%;
+    --pop-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 15%;
+    --input: 35 30% 90%;
+    --ring: 4 90% 65%;
+
+    --radius: 1rem;
+
+    /* Neo-brutalist shadows */
+    --shadow-brutal: 4px 4px 0px 0px hsl(0 0% 10%);
+    --shadow-brutal-lg: 6px 6px 0px 0px hsl(0 0% 10%);
+    --shadow-brutal-sm: 2px 2px 0px 0px hsl(0 0% 10%);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 0 0% 10%;
+    --foreground: 35 100% 96%;
+
+    --card: 0 0% 15%;
+    --card-foreground: 35 100% 96%;
+
+    --popover: 0 0% 15%;
+    --popover-foreground: 35 100% 96%;
+
+    --primary: 4 90% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 100% 60%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 20%;
+    --muted-foreground: 35 30% 70%;
+
+    --accent: 120 60% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --highlight: 330 85% 60%;
+    --highlight-foreground: 0 0% 100%;
+
+    --pop: 270 70% 60%;
+    --pop-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 35 30% 70%;
+    --input: 0 0% 20%;
+    --ring: 4 90% 65%;
+
+    --shadow-brutal: 4px 4px 0px 0px hsl(35 100% 96% / 0.3);
+    --shadow-brutal-lg: 6px 6px 0px 0px hsl(35 100% 96% / 0.3);
+    --shadow-brutal-sm: 2px 2px 0px 0px hsl(35 100% 96% / 0.3);
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .shadow-brutal {
+    box-shadow: var(--shadow-brutal);
+  }
+  
+  .shadow-brutal-lg {
+    box-shadow: var(--shadow-brutal-lg);
+  }
+  
+  .shadow-brutal-sm {
+    box-shadow: var(--shadow-brutal-sm);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-highlight to-secondary;
+  }
+}
+
+/* Custom animations */
+@keyframes pulse-scale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes bounce-soft {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-pulse-scale {
+  animation: pulse-scale 2s ease-in-out infinite;
+}
+
+.animate-shake {
+  animation: shake 0.3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-bounce-soft {
+  animation: bounce-soft 1s ease-in-out infinite;
+}
