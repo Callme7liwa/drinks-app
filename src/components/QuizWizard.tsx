@@ -2,15 +2,14 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { quizQuestions, QuizAnswer } from '@/lib/quiz-data';
-import { ChevronLeft, ChevronRight, LogOut } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface QuizWizardProps {
   onComplete: (answers: QuizAnswer) => void;
   onBack: () => void;
-  onLogout: () => void;
 }
 
-const QuizWizard = ({ onComplete, onBack, onLogout }: QuizWizardProps) => {
+const QuizWizard = ({ onComplete, onBack }: QuizWizardProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Partial<QuizAnswer>>({});
   const [direction, setDirection] = useState(1);
@@ -45,26 +44,15 @@ const QuizWizard = ({ onComplete, onBack, onLogout }: QuizWizardProps) => {
 
   return (
     <div className="min-h-screen flex flex-col px-6 py-8">
-      {/* Progress bar with logout */}
+      {/* Progress bar */}
       <div className="w-full mb-8">
-        <div className="flex items-center justify-between mb-2 gap-3">
-          <div className="flex-1 flex items-center justify-between min-w-0">
-            <span className="text-sm font-bold text-muted-foreground truncate">
-              Question {currentStep + 1} of {quizQuestions.length}
-            </span>
-            <span className="text-sm font-bold text-primary">
-              {Math.round(progress)}%
-            </span>
-          </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onLogout}
-            title="Logout"
-            className="flex-shrink-0 h-8 w-8"
-          >
-            <LogOut className="h-5 w-5" />
-          </Button>
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-sm font-bold text-muted-foreground">
+            Question {currentStep + 1} of {quizQuestions.length}
+          </span>
+          <span className="text-sm font-bold text-primary">
+            {Math.round(progress)}%
+          </span>
         </div>
         <div className="h-3 bg-muted rounded-full overflow-hidden border-2 border-foreground shadow-brutal-sm">
           <motion.div

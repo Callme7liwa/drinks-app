@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import LoginScreen from '@/components/LoginScreen';
 import LandingScreen from '@/components/LandingScreen';
 import QuizWizard from '@/components/QuizWizard';
 import MixingScreen from '@/components/MixingScreen';
 import ResultsScreen from '@/components/ResultsScreen';
 import { QuizAnswer } from '@/lib/quiz-data';
-import { LogOut } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
-type AppState = 'login' | 'landing' | 'quiz' | 'mixing' | 'results';
+type AppState = 'landing' | 'quiz' | 'mixing' | 'results';
 
 export interface DrinkResult {
   drinkName: string;
@@ -18,25 +15,11 @@ export interface DrinkResult {
 }
 
 const Index = () => {
-  const [appState, setAppState] = useState<AppState>(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    return isLoggedIn ? 'landing' : 'login';
-  });
+  const [appState, setAppState] = useState<AppState>('landing');
   const [answers, setAnswers] = useState<Partial<QuizAnswer>>({});
   const [result, setResult] = useState<DrinkResult | null>(null);
   
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY || '';
-
-  const handleLoginSuccess = () => {
-    setAppState('landing');
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('isLoggedIn');
-    setAnswers({});
-    setResult(null);
-    setAppState('login');
-  };
 
   const handleStartQuiz = () => {
     setAppState('quiz');
@@ -72,18 +55,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background overflow-hidden">
       <AnimatePresence mode="wait">
-        {appState === 'login' && (
-          <motion.div
-            key="login"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, x: 100 }}
-            transition={{ duration: 0.3 }}
-          >
-            <LoginScreen onLoginSuccess={handleLoginSuccess} />
-          </motion.div>
-        )}
-
         {appState === 'landing' && (
           <motion.div
             key="landing"
@@ -104,7 +75,7 @@ const Index = () => {
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.3 }}
           >
-            <QuizWizard onComplete={handleQuizComplete} onBack={() => setAppState('landing')} onLogout={handleLogout} />
+            <QuizWizard onComplete={handleQuizComplete} onBack={() => setAppState('landing')} />
           </motion.div>
         )}
 
