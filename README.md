@@ -37,9 +37,6 @@ Create a `.env` file in the project root with the following variables:
 VITE_OPENAI_API_KEY=your_openai_api_key_here
 ```
 
-**Login Credentials:**
-- Email: `user@sip-my-vibe.com`
-- Password: `drinkme123`
 
 ## What technologies are used for this project?
 
